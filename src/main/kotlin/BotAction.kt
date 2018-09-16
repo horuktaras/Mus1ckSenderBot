@@ -44,7 +44,7 @@ open class BotAction : DefaultAbsSender(DefaultBotOptions()) {
                         isProd -> FileUtils
                                 .moveFile(
                                         files.elementAt(it).file,
-                                        File(Config().loadMainProperty("music.location.sent") + "${files.elementAt(it).artist} - ${files.elementAt(it).title}.mp3"))
+                                        File(System.getProperty("user.dir") + Config().loadMainProperty("music.location.sent") + "${files.elementAt(it).artist} - ${files.elementAt(it).title}.mp3"))
                     }
                 }
     }

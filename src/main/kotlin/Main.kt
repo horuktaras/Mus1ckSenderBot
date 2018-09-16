@@ -19,7 +19,7 @@ fun main(args: Array<String>) {
 }
 
 fun release(isProd: Boolean) {
-    val location = Config().loadMainProperty("music.location.new")
+    val location = System.getProperty("user.dir") + Config().loadMainProperty("music.location.new")
 
     val hard = Parser().parseFilesFromFolder(location + Tag.HARD.value)
     val middle = Parser().parseFilesFromFolder(location + Tag.MIDDLE.value)

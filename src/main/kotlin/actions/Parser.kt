@@ -28,7 +28,7 @@ open class Parser {
                     id2.albumImage.isEmpty() -> throw Exception("albumImage is empty in ${mp3File.filename}")
                     id2.genreDescription.isNullOrEmpty() -> throw Exception("genreDescription is empty in ${mp3File.filename}")
                 }
-                val imagePath = Config().loadMainProperty("music.location.sent") + "/images/${id2.artist} - ${id2.title}.jpg"
+                val imagePath = System.getProperty("user.dir") + Config().loadMainProperty("music.location.sent") + "/images/${id2.artist} - ${id2.title}.jpg"
                 val track = Track(
                         id2.artist,
                         id2.title,
