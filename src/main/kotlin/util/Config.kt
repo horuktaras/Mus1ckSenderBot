@@ -50,37 +50,4 @@ open class Config {
         val cl: ClassLoader = ClassLoader.getSystemClassLoader()
         return cl.getResource(fileName).path
     }
-
-    private fun makeClient(): DefaultHttpClient {
-        val schemeRegistry = SchemeRegistry()
-        schemeRegistry.register(Scheme("http", 80, PlainSocketFactory.getSocketFactory()))
-        try {
-            schemeRegistry.register(Scheme("https", 443, MockSSLSocketFactory()))
-        } catch (e: KeyManagementException) {
-            e.printStackTrace()
-        } catch (e: UnrecoverableKeyException) {
-            e.printStackTrace()
-        } catch (e: NoSuchAlgorithmException) {
-            e.printStackTrace()
-        } catch (e: KeyStoreException) {
-            e.printStackTrace()
-        }
-
-        val cm = SingleClientConnManager(schemeRegistry)
-        return DefaultHttpClient(cm)
-    }
-
-    /**
-     * Set HTTP Client to Unirest
-     */
-    fun certificateTrusting() {
-        Unirest.setHttpClient(makeClient())
-    }
-
-    fun setWebHook(){
-        Unirest.get("https://api.telegram.org/bot"
-                + Config().loadMainProperty("bot.token")
-                + "/setWebhook?url=https://www.example.com/"
-                + Config().loadMainProperty("bot.name"))
-    }
 }

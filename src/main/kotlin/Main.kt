@@ -1,6 +1,5 @@
 package com.telegram.horuktaras.olx
 
-import com.mashape.unirest.http.Unirest
 import com.telegram.horuktaras.olx.actions.Parser
 import com.telegram.horuktaras.olx.enums.Tag
 import com.telegram.horuktaras.olx.utils.Config
@@ -9,7 +8,6 @@ import org.telegram.telegrambots.TelegramBotsApi
 
 
 fun main(args: Array<String>) {
-    setup()
     ApiContextInitializer.init()
     val botapi = TelegramBotsApi()
     botapi.registerBot(Bot())
@@ -27,9 +25,4 @@ fun release(isProd: Boolean) {
     BotAction().sendTrackToChannel(isProd, hard!!, Tag.HARD.value)
     BotAction().sendTrackToChannel(isProd, middle!!, Tag.MIDDLE.value)
     BotAction().sendTrackToChannel(isProd, light!!, Tag.LIGHT.value)
-}
-
-private fun setup(){
-    Config().certificateTrusting()
-    Config().setWebHook()
 }
