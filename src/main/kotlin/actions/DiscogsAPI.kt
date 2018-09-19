@@ -11,12 +11,12 @@ class DiscogsAPI() {
     private var SEARCH_API = "/database/search?q={query}&key={key}&secret={secret}"
 
     fun getInfoPerArtistAndTitleFields(artist: String, title: String, maxResultsNumber: Int): List<Result?>? {
-        val query = "$artist+$title"
+        val query = "${artist.replace(" ", "+")}+${title.replace(" ", "+")}"
         val asJson = Unirest.get("${Config().loadMainProperty("disogs.url")}$SEARCH_API")
-                .routeParam("per_page", maxResultsNumber.toString())
-                .queryString("query", query)
-                .queryString("key", Config().loadMainProperty("disogs.key"))
-                .queryString("secret", Config().loadMainProperty("discogs.secret"))
+                .queryString("per_page", maxResultsNumber.toString())
+                .routeParam("query", query)
+                .routeParam("key", Config().loadMainProperty("discogs.key"))
+                .routeParam("secret", Config().loadMainProperty("discogs.secret"))
                 .asJson()
 
         val fromJson = Gson().fromJson(asJson.body.toString(), DiscogsSearchResponse::class.java)
