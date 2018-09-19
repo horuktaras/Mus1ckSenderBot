@@ -5,10 +5,10 @@ import org.telegram.telegrambots.api.objects.Message
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 
-class Bot : TelegramLongPollingBot() {
+class PublishBot : TelegramLongPollingBot() {
 
     override fun getBotUsername(): String {
-        return Config().loadMainProperty("bot.name")
+        return Config().loadMainProperty("mus1c.bot.name")
     }
 
     override fun onUpdateReceived(update: Update?) {
@@ -16,7 +16,7 @@ class Bot : TelegramLongPollingBot() {
     }
 
     override fun getBotToken(): String {
-        return Config().loadMainProperty("bot.token")
+        return Config().loadMainProperty("mus1c.bot.token")
     }
 
 

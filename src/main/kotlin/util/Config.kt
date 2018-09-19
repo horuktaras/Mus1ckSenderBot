@@ -1,18 +1,7 @@
 package com.telegram.horuktaras.olx.utils
 
-import com.mashape.unirest.http.Unirest
-import org.apache.http.conn.scheme.PlainSocketFactory
-import org.apache.http.conn.scheme.Scheme
-import org.apache.http.conn.scheme.SchemeRegistry
-import org.apache.http.impl.client.DefaultHttpClient
-import org.apache.http.impl.conn.SingleClientConnManager
-import util.MockSSLSocketFactory
 import java.io.File
 import java.io.FileInputStream
-import java.security.KeyManagementException
-import java.security.KeyStoreException
-import java.security.NoSuchAlgorithmException
-import java.security.UnrecoverableKeyException
 import java.util.*
 
 open class Config {

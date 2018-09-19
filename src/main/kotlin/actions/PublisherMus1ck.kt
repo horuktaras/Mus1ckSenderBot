@@ -11,10 +11,10 @@ import org.telegram.telegrambots.bots.DefaultBotOptions
 import java.io.File
 
 
-open class BotAction : DefaultAbsSender(DefaultBotOptions()) {
+open class PublisherMus1ck : DefaultAbsSender(DefaultBotOptions()) {
 
     override fun getBotToken(): String {
-        return Config().loadMainProperty("bot.token")
+        return Config().loadMainProperty("mus1c.bot.token")
     }
 
     internal fun sendTrackToChannel(isProd: Boolean, tracks: Map<Mp3File, Track>, type: String) {
