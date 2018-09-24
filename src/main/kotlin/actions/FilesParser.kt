@@ -7,7 +7,7 @@ import java.io.File
 import java.nio.file.Files
 import java.util.*
 
-open class Parser {
+open class FilesParser {
 
     open fun parseFilesFromFolder(path: String): HashMap<Mp3File, Track>? {
 

@@ -2,12 +2,10 @@ package com.telegram.horuktaras.olx
 
 import com.telegram.horuktaras.olx.actions.BotTrigger
 import com.telegram.horuktaras.olx.utils.Config
-import org.telegram.telegrambots.api.objects.Message
-import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
+import org.telegram.telegrambots.meta.api.objects.Update
 
 class GetInfoBot : TelegramLongPollingBot() {
-
 
     override fun getBotUsername(): String {
         return Config().loadMainProperty("get.info.bot.name")
@@ -21,6 +19,4 @@ class GetInfoBot : TelegramLongPollingBot() {
     override fun getBotToken(): String {
         return Config().loadMainProperty("get.info.bot.token")
     }
-
-
 }

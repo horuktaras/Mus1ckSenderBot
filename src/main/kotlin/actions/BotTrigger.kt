@@ -4,12 +4,16 @@ import com.google.gson.Gson
 import com.mashape.unirest.http.Unirest
 import com.telegram.horuktaras.olx.utils.Config
 import dto.musix.MusiXResponse
-import org.telegram.telegrambots.api.methods.send.SendMessage
-import org.telegram.telegrambots.api.methods.send.SendPhoto
 import org.telegram.telegrambots.bots.DefaultAbsSender
 import org.telegram.telegrambots.bots.DefaultBotOptions
+import org.telegram.telegrambots.meta.api.methods.send.SendAudio
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery
+import org.telegram.telegrambots.meta.api.objects.InputFile
 
 open class BotTrigger : DefaultAbsSender(DefaultBotOptions()) {
+
     override fun getBotToken(): String {
         return Config().loadMainProperty("get.info.bot.token")
     }
@@ -46,13 +50,13 @@ open class BotTrigger : DefaultAbsSender(DefaultBotOptions()) {
                     msg.chatId = chatId
                     val elementAt = tracksMusiX.elementAt(it)
                     if (elementAt.albumCoverart500.isNotEmpty()) {
-                        art.photo = getImageURLByIMBD(elementAt.trackMbid)
+                        art.photo = InputFile(getImageURLByIMBD(elementAt.trackMbid))
                         art.caption = "Artist: ${elementAt.artistName}\n" +
                                 "Title:  ${elementAt.trackName}\n" +
                                 "Album:  ${elementAt.albumName}\n" +
                                 "Year:  ${elementAt.firstReleaseDate.subSequence(0, 4)}\n"
 
-                        sendPhoto(art)
+                        execute(art)
                     } else {
                         msg.text = "Artist: ${elementAt.artistName}\n" +
                                 "Title:  ${elementAt.trackName}\n" +
