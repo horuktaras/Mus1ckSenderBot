@@ -1,4 +1,4 @@
-package com.telegram.horuktaras.olx.dto
+package dto
 
 import java.io.File
 import java.nio.file.Path

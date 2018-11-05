@@ -1,7 +1,7 @@
-package com.telegram.horuktaras.olx
+package actions.bots
 
-import com.telegram.horuktaras.olx.actions.BotTrigger
-import com.telegram.horuktaras.olx.utils.Config
+import actions.BotTrigger
+import util.Config
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.meta.api.objects.Update
 
@@ -13,7 +13,9 @@ class GetInfoBot : TelegramLongPollingBot() {
 
     override fun onUpdateReceived(update: Update?) {
         val trigger = BotTrigger.create()
-        trigger.sendInfoToChannel(update?.channelPost!!.text)
+        val income = update?.channelPost!!.text
+        println("Message from BOT channel has come: $income")
+        trigger.sendInfoToChannel(income)
     }
 
     override fun getBotToken(): String {

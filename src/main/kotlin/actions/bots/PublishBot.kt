@@ -1,6 +1,6 @@
-package com.telegram.horuktaras.olx
+package actions.bots
 
-import com.telegram.horuktaras.olx.utils.Config
+import util.Config
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update

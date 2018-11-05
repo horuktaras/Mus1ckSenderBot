@@ -1,8 +1,8 @@
-package com.telegram.horuktaras.olx.actions
+package actions
 
 import com.mpatric.mp3agic.Mp3File
-import com.telegram.horuktaras.olx.dto.Track
-import com.telegram.horuktaras.olx.utils.Config
+import dto.Track
+import util.Config
 import java.io.File
 import java.nio.file.Files
 import java.util.*

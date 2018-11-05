@@ -1,7 +1,7 @@
-package com.telegram.horuktaras.olx.actions.bots
+package actions.bots
 
-import com.telegram.horuktaras.olx.actions.Get101TrackOnAir
-import com.telegram.horuktaras.olx.utils.Config
+import actions.Get101TrackOnAir
+import util.Config
 import enums.Command
 import enums.Station
 import org.telegram.telegrambots.bots.TelegramLongPollingBot

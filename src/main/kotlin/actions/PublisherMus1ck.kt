@@ -1,8 +1,8 @@
-package com.telegram.horuktaras.olx
+package actions
 
 import com.mpatric.mp3agic.Mp3File
-import com.telegram.horuktaras.olx.dto.Track
-import com.telegram.horuktaras.olx.utils.Config
+import dto.Track
+import util.Config
 import org.apache.commons.io.FileUtils
 import org.telegram.telegrambots.bots.DefaultAbsSender
 import org.telegram.telegrambots.bots.DefaultBotOptions
@@ -29,7 +29,7 @@ open class PublisherMus1ck : DefaultAbsSender(DefaultBotOptions()) {
                     val file = SendAudio()
                     file.chatId = id
                     file.disableNotification
-                    file.audio = InputFile(files.elementAt(it).file.absoluteFile.toString())
+                    file.setAudio(files.elementAt(it).file)
                     file.duration = files.elementAt(it).duration.toInt()
                     file.performer = "${files.elementAt(it).artist}"
                     file.title = "${files.elementAt(it).title}"
@@ -37,7 +37,7 @@ open class PublisherMus1ck : DefaultAbsSender(DefaultBotOptions()) {
                     msg.caption = "${files.elementAt(it).artist} - ${files.elementAt(it).title}\n\n#$type #${files.elementAt(it).genre?.toLowerCase()!!
                             .replace(" ", "")
                             .replace("drum&bass", "dnb")}"
-                    msg.photo = InputFile(files.elementAt(it).art?.toFile().toString())
+                    msg.setPhoto(files.elementAt(it).art?.toFile())
                     execute(msg)
                     execute(file)
                     Thread.sleep(5_000)

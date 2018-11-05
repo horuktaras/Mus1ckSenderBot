@@ -1,11 +1,10 @@
-package com.telegram.horuktaras.olx
-
-import com.telegram.horuktaras.olx.actions.FilesParser
-import com.telegram.horuktaras.olx.enums.Tag
-import com.telegram.horuktaras.olx.utils.Config
+import actions.FilesParser
+import actions.PublisherMus1ck
+import actions.bots.PublishBot
+import enums.Tag
 import org.telegram.telegrambots.ApiContextInitializer
 import org.telegram.telegrambots.meta.TelegramBotsApi
-
+import util.Config
 
 fun main(args: Array<String>) {
     ApiContextInitializer.init()

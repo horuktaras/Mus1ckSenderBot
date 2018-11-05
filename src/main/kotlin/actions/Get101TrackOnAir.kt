@@ -1,4 +1,4 @@
-package com.telegram.horuktaras.olx.actions
+package actions
 
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
@@ -12,16 +12,18 @@ class Get101TrackOnAir {
 
     fun getTrack(channelID: Int): Map<String?, String?> {
         var fromJson: Radio101Response? = null
-        val asJson = Unirest.get(URL)
+        val request = Unirest.get(URL)
                 .routeParam("channelID", channelID.toString())
+        val asJson = request
                 .asString()
+        println("101 URL: ${request.url}")
+        println("101 response status: ${asJson.status}")
+
         try {
             fromJson = Gson().fromJson(asJson.body, Radio101Response::class.java)
         } catch (e: JsonSyntaxException) {
             println("Seems field was not filled by 101. Error:\n $e})")
         }
-
-
         return mapOf(Pair(fromJson?.result?.jsonMemberShort?.title, fromJson?.result?.about?.audio?.get(0)?.filename))
     }
 }

@@ -1,4 +1,4 @@
-package com.telegram.horuktaras.olx.enums
+package enums
 
 enum class Tag(val value: String) {
     HARD("hard"),
