@@ -1,7 +1,6 @@
 package actions.bots
 
 import actions.Get101TrackOnAir
-import util.Config
 import enums.Command
 import enums.Station
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
@@ -13,23 +12,28 @@ import org.telegram.telegrambots.meta.api.objects.Message
 import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton
+import util.Config
+import java.io.File
+import java.net.URL
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+import java.nio.file.StandardCopyOption
 import java.util.*
 
-class GetTrackBot : TelegramLongPollingBot() {
+
+class Get101TrackBot : TelegramLongPollingBot() {
+
+    val TMP_MUSIC_DIR = System.getProperty("user.dir") + "/tmp/"
 
     override fun onUpdateReceived(update: Update?) {
-        try {
-            val msg: Message = update?.message ?: Message()
-            if (msg.text == Command.START.command) {
-                chooseGenreFromButton(msg)
-            }
-            if (update?.hasCallbackQuery()!!) {
-                findCommandFromCallBack(update.callbackQuery)
-            }
-        } catch (e: Exception) {
-            throw RuntimeException("${e.message}")
+        val msg: Message = update?.message ?: Message()
+        if (msg.text == Command.START.command) {
+            chooseGenreFromButton(msg)
         }
-
+        if (update?.hasCallbackQuery()!!) {
+            findCommandFromCallBack(update.callbackQuery)
+        }
     }
 
     override fun getBotUsername(): String {
@@ -85,15 +89,30 @@ class GetTrackBot : TelegramLongPollingBot() {
         val item = searchResult.toList()[0]
         val name = item.first
         val url = item.second
-
+        if (url !=null){
+        createAndCopyNewFile(url!!, name!!)
         val audio = SendAudio()
         audio.chatId = callbackQuery.message.chat.id.toString()
         audio.disableNotification
-        audio.audio = InputFile(url)
-        audio.performer = name
-        audio.title = name
+        audio.setAudio(File("$TMP_MUSIC_DIR\\$name.mp3"))
         audio.caption = "Title: $name"
+            println("Track has been sent: $name")
         execute(audio)
+        Files.delete(File("$TMP_MUSIC_DIR\\$name.mp3").toPath())}
+        else {
+            val error = "No file in response from Radio"
+            val msg = SendMessage()
+            msg.chatId = callbackQuery.message.chat.id.toString()
+            msg.text = error
+            execute(msg)
+            println(error)
+        }
+    }
+
+    private fun createAndCopyNewFile(url: String, name: String) {
+        val stream = URL(url).openStream()
+        Files.copy(stream, Paths.get("$TMP_MUSIC_DIR\\$name.mp3"), StandardCopyOption.REPLACE_EXISTING)
+        stream.close()
     }
 
 }
