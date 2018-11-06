@@ -6,7 +6,8 @@ import org.telegram.telegrambots.meta.TelegramBotsApi
 fun main(args: Array<String>) {
     ApiContextInitializer.init()
     val botapi = TelegramBotsApi()
-    botapi.registerBot(GetInfoBot())
+    //TODO temporary disabled. Should be reworked
+    //botapi.registerBot(GetInfoBot())
     botapi.registerBot(Get101TrackBot())
     println("GetTrack has been started...")
 }

@@ -27,7 +27,7 @@ open class BotTrigger : DefaultAbsSender(DefaultBotOptions()) {
     }
 
     fun sendInfoToChannel(income: String) {
-        val chatId = "-1001225252656"
+        val chatId = "-212237444"
         sendMessageFromMusiX(income, chatId)
     }
 
