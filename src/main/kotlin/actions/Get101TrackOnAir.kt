@@ -21,7 +21,7 @@ class Get101TrackOnAir {
 
         try {
             fromJson = Gson().fromJson(asJson.body, Radio101Response::class.java)
-        } catch (e: JsonSyntaxException) {
+        } catch (e: Exception) {
             println("Seems field was not filled by 101. Error:\n $e})")
         }
         return mapOf(Pair(fromJson?.result?.jsonMemberShort?.title, fromJson?.result?.about?.audio?.get(0)?.filename))
